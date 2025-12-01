@@ -1,0 +1,919 @@
+/* ========================================
+   General Reset & Base Styles
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #f5f1e9;
+    --primary-color: #333;
+    --accent-color: #8b7355;
+    --text-color: #333;
+    --white: #ffffff;
+    --border-color: #e0dcd4;
+    --transition: all 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body.scroll-disabled {
+    overflow: hidden;
+}
+
+/* ========================================
+   Typography
+   ======================================== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+}
+
+/* ========================================
+   Container
+   ======================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ========================================
+   Fixed Header
+   ======================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    box-shadow: none;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.header.scrolled {
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem 2rem;
+    transition: var(--transition);
+}
+
+.header.scrolled .header-container {
+    padding: 2rem 2rem;
+}
+
+.logo img {
+    height: 60px;
+    height: 80px;
+    transition: var(--transition);
+}
+
+.header.scrolled .logo img {
+    height: 45px;
+    height: 60px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+    padding: 0;
+}
+
+.nav a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    font-weight: 400;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav a:hover {
+    color: var(--accent-color);
+}
+
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.mobile-menu-toggle span {
+    width: 25px;
+    height: 2px;
+    background-color: var(--primary-color);
+    margin: 3px 0;
+    transition: var(--transition);
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
+/* Keyframes for hero image reveal animation */
+@keyframes heroReveal {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(1.4) rotate(5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.28) rotate(0deg);
+    }
+}
+
+/* Keyframes for hero content fade in from bottom */
+@keyframes heroContentReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-550px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-600px);
+    }
+}
+
+.hero {
+    position: relative;
+    height: 130vh;
+    min-height: 600px;
+    margin-top: 300px;
+    overflow: hidden;
+    background-color: #f5f1e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+}
+
+.hero-image {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%) scale(1.28);
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    z-index: 1;
+    animation: heroReveal 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    transform: translateY(-600px); /* Adjust this value to move the text up or down */
+    opacity: 0;
+    animation: heroContentReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+}
+
+.hero-content h1 {
+    font-family: 'Baskerville Neo', 'Baskerville', 'Libre Baskerville', serif;
+    font-size: 11rem;
+    font-weight: 1000;
+    color: var(--primary-color);
+    text-shadow: none;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* ========================================
+   Section Title (Common)
+   ======================================== */
+.section-title {
+    font-size: 4rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 5rem;
+    letter-spacing: 4px;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* ========================================
+   Friends Section
+   ======================================== */
+.friend-section {
+    padding: 10rem 0;
+    background-color: var(--bg-color);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.friend-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.friend-title {
+    font-size: 4rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 6rem;
+    letter-spacing: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--primary-color);
+}
+
+.friend-top-block {
+    display: flex;
+    align-items: center;
+    margin-left: -2rem; /* container padding 상쇄 */
+    margin-right: -2rem; /* container padding 상쇄 */
+    margin-bottom: 8rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.friend-section.visible .friend-top-block {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.friend-character-image {
+    flex: 0 0 60%; /* 이미지 영역의 너비를 50%로 고정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.friend-image-placeholder {
+    width: 100%;
+    height: 500px;
+    background: linear-gradient(135deg, #e8e3db 0%, #d4c5a9 100%);
+    transition: none; /* 전체 블록 호버 효과로 대체 */
+    border-radius: 0; /* 모서리 둥글림 제거 */
+}
+
+.friend-top-block:hover .friend-image-placeholder {
+    transform: scale(1.02);
+}
+
+.friend-content {
+    flex: 1;
+    padding: 2rem 4rem; /* 텍스트 영역에 여백 추가 */
+}
+
+.friend-name {
+    font-size: 4rem;
+    font-weight: 600; /* 굵기를 살짝 줄여 부드러운 느낌 강조 */
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--primary-color);
+}
+
+.friend-description {
+    font-size: 1.2rem;
+    line-height: 2;
+    color: #666;
+    margin-bottom: 3rem;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.friend-bottom-image {
+    /* max-width: 1400px; */
+    /* margin: 0 auto; */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.friend-section.visible .friend-bottom-image {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+}
+
+.friend-large-image-placeholder {
+    width: 100%;
+    height: 600px;
+    background: linear-gradient(135deg, #d4c5a9 0%, #b8aa8f 100%);
+    transition: none;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.friend-bottom-image:hover .friend-large-image-placeholder {
+    transform: scale(1.01);
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    font-weight: 400;
+    border: 1px solid var(--primary-color);
+    border-radius: 30px;
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    /* transform: translateX(10px); */ /* 버튼 호버 시 움직임 제거하여 안정감 부여 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   Products Section
+   ======================================== */
+.products-section {
+    padding: 10rem 0;
+    background-color: var(--white);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.products-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 4rem 3rem;
+    margin-top: 4rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.product-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-card:hover {
+    transform: translateY(-15px);
+}
+
+.product-image-placeholder {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(135deg, #d4c5a9 0%, #b8aa8f 100%);
+    margin-bottom: 1.5rem;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+}
+
+.product-card:hover .product-image-placeholder {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 0 0.5rem;
+}
+
+.product-name {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+    color: var(--primary-color);
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.product-card:hover .product-name {
+    color: var(--accent-color);
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--accent-color);
+    letter-spacing: 1px;
+}
+
+/* ========================================
+   COTIELOG Section
+   ======================================== */
+.cotielog-section {
+    padding: 10rem 0;
+    background-color: var(--bg-color);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.cotielog-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cotielog-scroll {
+    display: flex;
+    gap: 3rem;
+    overflow-x: auto;
+    padding: 3rem 2rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) var(--border-color);
+}
+
+.cotielog-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.cotielog-scroll::-webkit-scrollbar-track {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+.cotielog-scroll::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.cotielog-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+.cotielog-card {
+    flex: 0 0 450px;
+    position: relative;
+    scroll-snap-align: start;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+}
+
+.cotielog-card:hover {
+    transform: scale(1.02);
+}
+
+.cotielog-image-placeholder {
+    width: 100%;
+    height: 550px;
+    background: linear-gradient(135deg, #d4c5a9 0%, #b8aa8f 100%);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+}
+
+.cotielog-card:hover .cotielog-image-placeholder {
+    transform: scale(1.05);
+}
+
+.cotielog-date {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: #666;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* ========================================
+   Instagram Section
+   ======================================== */
+.instagram-section {
+    padding: 10rem 0;
+    background-color: var(--white);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.instagram-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-subtitle {
+    text-align: center;
+    margin-top: -2rem;
+    margin-bottom: 4rem;
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    font-weight: 300;
+}
+
+.instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.instagram-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 1;
+}
+
+.instagram-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #d4c5a9 0%, #b8aa8f 100%);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.instagram-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.4s ease;
+    z-index: 1;
+}
+
+.instagram-item:hover::after {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.instagram-item:hover .instagram-image-placeholder {
+    transform: scale(1.1);
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+.footer {
+    position: relative;
+    padding: 8rem 0 3rem;
+    background-color: var(--white);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2rem;
+}
+
+.footer-left,
+.footer-right {
+    flex: 1;
+}
+
+.footer h4 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--primary-color);
+}
+
+.footer p {
+    margin-bottom: 1rem;
+    color: #666;
+    line-height: 2;
+    font-size: 1rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.footer-social a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.footer-social a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: var(--primary-color);
+}
+
+.footer-social a:hover::after {
+    width: 100%;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.footer-bottom p {
+    color: #999;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.wave-border {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+}
+
+.wave-border path {
+    fill: var(--bg-color);
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+
+    .section-title {
+        font-size: 3rem;
+    }
+
+    .products-section,
+    .cotielog-section,
+    .instagram-section {
+        padding: 6rem 0;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 3rem 2rem;
+    }
+
+    .friend-section {
+        padding: 6rem 0;
+    }
+
+    .friend-title {
+        font-size: 3rem;
+        margin-bottom: 4rem;
+    }
+
+    .friend-top-block {
+        gap: 4rem;
+        margin-bottom: 4rem;
+    }
+
+    .friend-image-placeholder {
+        max-width: 400px;
+        height: 400px;
+    }
+
+    .friend-name {
+        font-size: 3rem;
+    }
+
+    .friend-large-image-placeholder {
+        height: 500px;
+    }
+
+    .cotielog-card {
+        flex: 0 0 350px;
+    }
+
+    .cotielog-image-placeholder {
+        height: 450px;
+    }
+
+    .instagram-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        padding: 1rem 1.5rem;
+    }
+
+    .logo a {
+        font-size: 1.5rem;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .nav.active {
+        display: block;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        padding: 2rem;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .hero {
+        height: 70vh;
+        min-height: 500px;
+        margin-top: 70px;
+        padding-top: 0;
+    }
+
+    .hero-content {
+        top: -8%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+        white-space: normal;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .friend-section,
+    .products-section,
+    .cotielog-section,
+    .instagram-section {
+        padding: 5rem 0;
+    }
+
+    .friend-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .friend-top-block {
+        flex-direction: column !important;
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .friend-image-placeholder {
+        max-width: 100%;
+        height: 350px;
+    }
+
+    .friend-content {
+        padding: 1rem;
+    }
+
+    .friend-name {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .friend-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .friend-large-image-placeholder {
+        height: 400px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .product-image-placeholder {
+        height: 300px;
+    }
+
+    .cotielog-scroll {
+        padding: 2rem 1rem;
+        gap: 2rem;
+    }
+
+    .cotielog-card {
+        flex: 0 0 280px;
+    }
+
+    .cotielog-image-placeholder {
+        height: 350px;
+    }
+
+    .instagram-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .footer {
+        padding: 5rem 0 2rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .footer h4 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .brands-grid,
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .products-grid {
+        gap: 2rem;
+    }
+}
